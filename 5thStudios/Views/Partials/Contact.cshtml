@@ -1,0 +1,92 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using System;
+@using System.Text;
+@using formulate.app.Types;
+@using formulate.core.Models;
+
+@{
+    //Instantiate variables
+    StringBuilder strAddress = new StringBuilder();
+    string phoneNo;
+    string fullName;
+    FormViewModel vm; // = new FormViewModel();
+    ConfiguredFormInfo pickedForm = new ConfiguredFormInfo();
+
+    //Create the address string
+    foreach (var addr in CurrentPage.address)
+    {
+        strAddress.Append(addr.address + ",<br />");
+        strAddress.Append(addr.city + ", ");
+        strAddress.Append(addr.state + " ");
+        strAddress.Append(addr.zip);
+    }
+
+    //
+    fullName = CurrentPage.firstName + " " + CurrentPage.lastName;
+
+    //Create the phone string
+    phoneNo = String.Format("({0}) {1}-{2}"
+        , CurrentPage.phoneNumber.Substring(0, 3)
+        , CurrentPage.phoneNumber.Substring(3, 3)
+        , CurrentPage.phoneNumber.Substring(6, CurrentPage.phoneNumber.Length - 6));
+    
+    // Get a view model for the contact form.
+    pickedForm = Model.Content.GetPropertyValue<ConfiguredFormInfo>("formPicker");
+    vm = formulate.api.Rendering.GetFormViewModel(pickedForm.FormId, pickedForm.LayoutId, pickedForm.TemplateId, Model.Content);
+}
+
+
+
+
+<article class="content contact white-bg" id="chaptercontact">
+    <div class="inner">
+        <h2>Contact</h2>
+        <div class="title-divider"></div>
+        
+        @Html.Raw(CurrentPage.contactSummary)
+
+
+        <div class="contact-con">
+            <div class="container-sub">
+                <div class="row">
+                    <div class="contact-form">
+                        <h3>Drop Me a Line</h3>
+                        <div class="formulate-wrapper">
+                            @Html.Partial("~/Views/Partials/Formulate/RenderForm.cshtml", vm)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="full-divider"></div>
+            <div class="container-sub margin-top50">
+                <div class="row">
+                    <div class="contact-details">
+                        <div class="col-6 m-margin-top30">
+                            <div class="row">
+                                <div class="col-2 icon-block address"><i class="fa fa-map-marker"></i></div>
+                                <strong>@fullName</strong><br>
+                                <address>
+                                    @Html.Raw(strAddress.ToString())
+                                </address>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <br class="show-for-small" />
+                            <br class="show-for-small" />
+                            <div class="row">
+                                <div class="col-2 icon-block phone"><i class="fa fa-phone"></i></div>
+                                <div class="">
+                                    <strong>Phone</strong><br>
+                                    <a href="tel:@CurrentPage.phoneNumber">@phoneNo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                @Html.Raw(CurrentPage.contactConclusion)
+
+            </div>
+        </div>
+    </div>
+</article>

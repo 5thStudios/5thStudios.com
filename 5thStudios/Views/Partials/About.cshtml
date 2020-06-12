@@ -1,0 +1,31 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using System;
+@using System.Text;
+
+@{
+    //Instantiate variables
+    IPublishedContent ipImg;
+    string aboutImgUrl;
+    IPublishedContent ipIntro = Umbraco.TypedContent(Int32.Parse(Umbraco.Field("aboutMyself").ToString()));
+
+    //Obtain Introduction Image
+    ipImg = Umbraco.TypedMedia(Int32.Parse(Umbraco.Field("aboutBackgroundImage").ToString()));
+    aboutImgUrl = ipImg.GetCropUrl("About_804x1080");
+}
+
+<style>
+    .about {background: url('@aboutImgUrl')no-repeat right top #474645;}
+</style>
+
+
+
+<article class="content about white-bg" id="chapterabout">
+    <div class="inner">
+        <h2>About</h2>
+        <div class="title-divider"></div>
+        <div class="about-con">
+            @ipIntro.GetGridHtml(Html, "letter")
+        </div>
+    </div>
+</article>
+

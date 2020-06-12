@@ -1,0 +1,58 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    //Instantiate variables
+    IPublishedContent ipExperienceList = Model.Content.Site().FirstChild("experienceList");
+    IEnumerable<IPublishedContent> lstExperiences;
+    string years = (DateTime.Today.Year - 2004).ToString();
+
+    //Obtain list of work experiences
+    lstExperiences = ipExperienceList.Children().Where(x => x.IsVisible());
+}
+
+<article class="content experience white-bg" id="chapterexperience">
+    <div class="inner">
+        <h2>Experience</h2>
+        <div class="title-divider"></div>
+
+        <h3>Over <strong>@years</strong> years of Experience!</h3>
+        @Html.Raw(ipExperienceList.GetPropertyValue<string>("experienceDetails"))
+
+        <div class="experience-con">
+            <div class="container-sub">
+                <div class="row">
+                    @foreach (var item in lstExperiences)
+                    {
+                        <div class="full-divider"></div>
+                        <div class="experience-details">
+                            <div class="col-2 margin-bottom50 margin-top50 hide-for-small">
+                                <div class="icon-block">
+                                    @if (item.HasValue("logo"))
+                                    {
+                                        IPublishedContent ipLogo = Umbraco.TypedMedia((item.GetPropertyValue<string>("logo")));
+                                        <img alt="@(item.GetPropertyValue<string>("companyName"))" src="@ipLogo.GetCropUrl("Logo_140x140")" />
+                                    }
+                                </div>
+                                @*<div class="icon-block"><i class="fas fa-capsules"></i></div>*@
+                            </div>
+                            <div class="col-4 margin-bottom50 margin-top50">
+                                <div class="padded-gutters">
+                                    <h5>@(item.GetPropertyValue<string>("companyName"))</h5>
+                                    <h4>@(item.GetPropertyValue<string>("jobTitle"))</h4>
+                                    <div>
+                                        @(item.GetPropertyValue<DateTime>("startDate").ToString("MMM yyyy").ToUpper())
+                                        -
+                                        @(item.IsNull("endDate") ? "PRESENT" : (item.GetPropertyValue<DateTime>("endDate").ToString("MMM yyyy").ToUpper()))
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 margin-bottom50 margin-top50">
+                                @Html.Raw(Umbraco.ReplaceLineBreaksForHtml((item.GetPropertyValue<string>("description"))))
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

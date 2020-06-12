@@ -1,0 +1,12 @@
+{
+  "KindId": "b03310e9-3207-44dc-be96-be0cf4f26c59",
+  "Id": "8146d913-9411-4498-a216-98599493e83f",
+  "Path": [
+    "f92ac99b-a3f2-4734-a91f-87f84f47a73a",
+    "74510a00-2ff7-4bcb-9a64-c6f3ce8c6b96",
+    "8146d913-9411-4498-a216-98599493e83f"
+  ],
+  "Alias": "contactFormLayout",
+  "Name": "Contact Form Layout",
+  "Data": "{\r\n  \"rows\": [\r\n    {\r\n      \"cells\": [\r\n        {\r\n          \"columnSpan\": 6,\r\n          \"fields\": [\r\n            {\r\n              \"id\": \"384a549aa03147ed832930dc922f4150\"\r\n            }\r\n          ]\r\n        },\r\n        {\r\n          \"columnSpan\": 6,\r\n          \"fields\": [\r\n            {\r\n              \"id\": \"33e9506933994dfb9497ce3cb810a0b3\"\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"cells\": [\r\n        {\r\n          \"columnSpan\": 12,\r\n          \"fields\": [\r\n            {\r\n              \"id\": \"5f152d95817246a786af0cf90bcfdd7f\"\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"cells\": [\r\n        {\r\n          \"columnSpan\": 12,\r\n          \"fields\": [\r\n            {\r\n              \"id\": \"bcb5b87f2f614050a146a29b257be99d\"\r\n            },\r\n            {\r\n              \"id\": \"7d78dadbf9ec4b77a4cb5a53ab9ddfbc\"\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"formId\": \"0d739be742dc4a7abc7f91106a0be881\"\r\n}"
+}

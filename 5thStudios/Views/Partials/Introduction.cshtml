@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    //Instantiate variables
+    IPublishedContent ipIntroImg;
+    string introImgUrl;
+    //IPublishedContent ipSignatureImg;
+    //string signatureImgUrl;
+
+    //Obtain Introduction Image
+    ipIntroImg = Umbraco.TypedMedia(Int32.Parse(Umbraco.Field("introductionImage").ToString()));
+    introImgUrl = ipIntroImg.GetCropUrl("Intro_804x990");
+
+    //Obtain Signature Image
+    //ipSignatureImg = Umbraco.TypedMedia(Int32.Parse(Umbraco.Field("signature").ToString()));
+    //signatureImgUrl = ipSignatureImg.GetCropUrl("Signature_150x80");
+}
+
+<article class="content introduction noscroll" id="chapterintroduction">
+    <div class="inner">
+        <h1>
+            <span>HEllo, I'm</span><br>
+            @Umbraco.Field("firstName") @Umbraco.Field("lastName")
+        </h1>
+        <span class="title">@Umbraco.Field("careerTitle")</span>
+        @*<br class="hide-for-small" />
+        <br class="hide-for-small" />
+        <img src="@signatureImgUrl" class="signature" alt="James Fifth" />*@
+    </div>
+    <div id="owl-demo" class="owl-carousel">
+        <div class="item"><img src="@introImgUrl" alt="" /></div>
+        @*<div class="item"><img src="http://placehold.it/804x990" alt="" /></div>
+        <div class="item"><img src="http://placehold.it/804x990" alt="" /></div>*@
+    </div>
+</article>

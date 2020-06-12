@@ -1,0 +1,53 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    //Instantiate variables
+    IPublishedContent ipEducationList = Model.Content.Site().FirstChild("educationList");
+    IEnumerable<IPublishedContent> lstEducation;
+
+    //Obtain list of education
+    lstEducation = ipEducationList.Children().Where(x => x.IsVisible());
+}
+
+
+
+<article class="content education gray-bg" id="chaptereducation">
+    <div class="inner">
+        <h2>Education</h2>
+        <div class="title-divider"></div>
+
+        @Html.Raw(ipEducationList.GetPropertyValue<string>("educationSummary"))
+        
+        <div class="education-con">
+            <div class="container-sub">
+                <div class="row">
+                    @foreach (var item in lstEducation)
+                    {
+                        <div class="full-divider"></div>
+                        <div class="education-details">
+                            <div class="col-2 margin-bottom50 margin-top50 hide-for-small">
+                                <div class="icon-block">
+                                    @Html.Raw((item.GetPropertyValue<string>("fontAwesomeIcon")))
+                                </div>
+                            </div>
+                            <div class="col-4 margin-bottom50 margin-top50">
+                                <div class="padded-gutters">
+                                    <h5>@(item.GetPropertyValue<string>("schoolLearningPlatform"))</h5>
+                                    <h4>@(item.GetPropertyValue<string>("degreeCourse"))</h4>
+                                    <div>
+                                        @(item.GetPropertyValue<Int16>("startYear"))
+                                        -
+                                        @(item.GetPropertyValue<Int16>("endYear"))
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 margin-bottom50 margin-top50">
+                                @Html.Raw(Umbraco.ReplaceLineBreaksForHtml((item.GetPropertyValue<string>("description"))))
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

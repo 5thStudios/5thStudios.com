@@ -1,0 +1,207 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.web;
+@using Umbraco.Web.PublishedContentModels;
+@{
+    Layout = null;
+}
+
+
+<h1>Demographics</h1>
+@Umbraco.Field("firstName") @Umbraco.Field("lastName")<br />
+@Umbraco.Field("careerTitle")<br />
+@Umbraco.Field("email", casing: RenderFieldCaseType.Lower)<br />
+@Umbraco.Field("phoneNumber")<br /><br />
+
+@foreach (var addr in CurrentPage.address)
+{
+    @addr.address <br />
+    @addr.city <br />
+    @addr.state <br />
+    @addr.zip <br />
+}
+
+
+<h1>Languages & Patterns</h1>
+@foreach (var ptrn in CurrentPage.applicationPatterns)
+{
+    @ptrn<br />
+}
+<br />
+
+@foreach (var languageSkill in CurrentPage.languageSkills)
+{
+    @languageSkill.skill <br />
+    @languageSkill.experience <br />
+    @languageSkill.percentage 
+
+    if (languageSkill.icon != null)
+    {
+        IPublishedContent iconImg = Umbraco.TypedMedia(languageSkill.icon.ToString());
+        <br />
+        @iconImg.Url
+    }
+    <br /><br />
+}
+
+
+<h1>Library Knowledge</h1>
+@foreach (var libraryKnowledge in CurrentPage.libraryKnowledge)
+{
+    @libraryKnowledge.skill <br />
+    @libraryKnowledge.experience <br />
+    @libraryKnowledge.percentage 
+
+    if (libraryKnowledge.icon != null)
+    {
+        IPublishedContent iconImg = Umbraco.TypedMedia(libraryKnowledge.icon.ToString());
+        <br />
+        @iconImg.Url
+    }
+    <br /><br />
+}
+
+
+
+<h1>Tools of the Trade</h1>
+@foreach (var tools in CurrentPage.toolsOfTheTrade)
+{
+    @tools.skill <br />
+    @tools.experience <br />
+    @tools.percentage 
+
+    if (tools.icon != null)
+    {
+        IPublishedContent iconImg = Umbraco.TypedMedia(tools.icon.ToString());
+        <br />
+        @iconImg.Url
+    }
+    <br /><br />
+}
+
+
+
+<h1>Book Ends</h1>
+@{ 
+    int myId = Int32.Parse(Umbraco.Field("coverLetter").ToString());
+    IPublishedContent ipCoverLetter = Umbraco.TypedContent(myId);
+}
+<h3>Hobbies</h3>
+@Umbraco.Field("hobbies", convertLineBreaks: true)
+<h3>Cover Letter</h3>
+@ipCoverLetter.GetGridHtml(Html, "letter", "Foundation6")
+
+
+
+
+<h1>Projects & Achievements</h1>
+@{
+    var projects = Model.Content.Site().FirstChild("projects").Children().Where(x => x.IsVisible());
+}
+<ul>
+	@foreach (var item in projects) {
+		<li>
+			@(item.GetPropertyValue<string>("title"))<br />
+			@(item.GetPropertyValue<string>("siteUrl"))<br />
+
+            @if (item.HasValue("screenshot"))
+            {
+                IPublishedContent ipScreenshot = Umbraco.TypedMedia((item.GetPropertyValue<string>("screenshot")));
+                @ipScreenshot.Url
+                <br />
+            }
+                        
+            @Html.Raw(Umbraco.ReplaceLineBreaksForHtml((item.GetPropertyValue<string>("description"))))
+            <br /><br />
+		</li>
+    }
+</ul>
+
+
+
+
+
+<h1>Work Experience</h1>
+@{
+    var experienceList = Model.Content.Site().FirstChild("experienceList").Children().Where(x => x.IsVisible());
+}
+<ul>
+	@foreach (var item in experienceList) {
+		<li>
+			@(item.GetPropertyValue<string>("companyName"))<br />
+			@(item.GetPropertyValue<string>("jobTitle"))<br />
+			@(item.GetPropertyValue<string>("startDate"))<br />
+            @(item.IsNull("endDate") ? "Present" : item.GetPropertyValue<string>("endDate"));
+            <br />
+			@(item.GetPropertyValue<string>("city"))<br />
+			@(item.GetPropertyValue<string>("state"))<br />
+
+            @if (item.HasValue("logo"))
+            {
+                IPublishedContent ipLogo = Umbraco.TypedMedia((item.GetPropertyValue<string>("logo")));
+                @ipLogo.Url
+                <br />
+            }
+                        
+            @Html.Raw(Umbraco.ReplaceLineBreaksForHtml((item.GetPropertyValue<string>("description"))))
+            <br /><br />
+
+		</li>
+    }
+</ul>
+
+
+
+
+
+<h1>Extended Education</h1>
+@{
+    var educationList = Model.Content.Site().FirstChild("educationList").Children().Where(x => x.IsVisible());
+}
+<ul>
+	@foreach (var item in educationList) {
+		<li>
+			@(item.GetPropertyValue<string>("schoolLearningPlatform"))<br />
+			@(item.GetPropertyValue<string>("degreeCourse"))<br />
+			@(item.GetPropertyValue<Int16>("startYear"))<br />
+			@(item.GetPropertyValue<Int16>("endYear"))<br />
+			@(item.GetPropertyValue<string>("city"))<br />
+			@(item.GetPropertyValue<string>("state"))<br />        
+            @Html.Raw(Umbraco.ReplaceLineBreaksForHtml((item.GetPropertyValue<string>("description"))))
+            <br /><br />
+		</li>
+    }
+</ul>
+
+
+
+
+<h1>Media</h1>
+@{
+    IPublishedContent ip = Umbraco.TypedMedia(Int32.Parse(Umbraco.Field("introductionImage").ToString()));
+    //Image imgMedia = Umbraco.AssignedContentItem.GetPropertyValue<IPublishedContent>("introductionImage") as Umbraco.Web.PublishedContentModels.Image;
+
+    string crop1 = ip.GetCropUrl("Intro_804x990");
+    //string crop2 = imgMedia.GetCropUrl("Intro_804x990");
+    //string crop3 = imgMedia.GetCropUrl(100,100);
+}
+
+@*  1221    *@
+@*@Umbraco.Field("introductionImage")<br />*@
+
+@*  /media/1061/ag_jimfifth_gray.jpg*@
+@*@Umbraco.Media(Int32.Parse(Umbraco.Field("introductionImage").ToString())).Url<br />  *@
+
+@*  /media/1061/ag_jimfifth_gray.jpg    *@
+@*@ip.Url<br />*@
+
+@*  /media/1061/ag_jimfifth_gray.jpg?anchor=center&mode=crop&width=804&height=990&rnd=131949156960000000    *@
+@crop1<br />
+
+@*  /media/1061/ag_jimfifth_gray.jpg?anchor=center&mode=crop&width=804&height=990&rnd=131949156960000000    *@
+@*@crop2<br />*@
+
+@*  /media/1061/ag_jimfifth_gray.jpg?crop=0.12222222222222222,0,0.065656565656565691,0&cropmode=percentage&width=100&height=100&rnd=131949156960000000  *@
+@*@crop3<br />*@
+
+@*  /media/1061/ag_jimfifth_gray.jpg?crop=0.12222222222222222,0,0.065656565656565691,0&cropmode=percentage&width=100&height=100&rnd=131949156960000000  *@
+@*@Url.GetCropUrl(ip, 100, 100)*@

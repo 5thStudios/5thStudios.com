@@ -1,0 +1,84 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    //Instantiate variables
+    IPublishedContent ipProjectList = Model.Content.Site().FirstChild("projects");
+    IEnumerable<IPublishedContent> lstProjects;
+
+    //Obtain list of projects
+    lstProjects = ipProjectList.Children().Where(x => x.IsVisible());
+}
+
+
+
+<article class="content portfolio white-bg" id="chapterportfolio">
+    <div class="inner">
+        <h2>Portfolio</h2>
+        <div class="title-divider"></div>
+
+        @Html.Raw(ipProjectList.GetPropertyValue<string>("portfolioSummary"))
+
+        <div class="portfolio-con">
+            <div class="container-sub margin-top50">
+                <div class="row">
+                    <div id="grid-gallery" class="grid-gallery">
+                        <section class="grid-wrap">
+                            <ul class="grid">
+                                @foreach (var item in lstProjects)
+                                {
+                                    <li>
+                                        <figure>
+                                            @{ IPublishedContent ipScreenshot = Umbraco.TypedMedia((item.GetPropertyValue<string>("screenshot"))); }
+                                            <img alt="@(item.GetPropertyValue<string>("title"))" src="@ipScreenshot.GetCropUrl("Portfolio_700x475")" />
+                                            <figcaption>
+                                                <div class="figcaption-details">
+                                                    <img src="/images/icon-plus.png" height="82" width="82" alt="" />
+                                                    <h3>@(item.GetPropertyValue<string>("title"))</h3>
+                                                    <span>@(item.GetPropertyValue<string>("siteUrl"))</span>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                }
+                            </ul>
+                        </section>
+
+                        <!-- Lightbox Popup -->
+                        <section class="slideshow">
+                            <ul>
+                                
+                                @foreach (var item in lstProjects)
+                                {
+                                    <li>
+                                        <figure>
+                                            @{ IPublishedContent ipScreenshot = Umbraco.TypedMedia((item.GetPropertyValue<string>("screenshot"))); }
+                                            <figcaption>
+                                                <h3>@(item.GetPropertyValue<string>("title"))</h3>
+                                                <span><a target="_blank" href="@(item.GetPropertyValue<string>("siteUrl"))">@(item.GetPropertyValue<string>("siteUrl"))</a></span>
+                                                <p>@Html.Raw(Umbraco.ReplaceLineBreaksForHtml((item.GetPropertyValue<string>("description"))))</p>
+                                            </figcaption>
+                                            <div class="owl-carousel">
+                                                @if (item.HasValue("carouselShots"))
+                                                {
+                                                    var carouselShotList = item.GetPropertyValue<List<IPublishedContent>>("carouselShots");
+                                                    foreach (var carouselShot in carouselShotList)
+                                                    {
+                                                        <div class="item">
+                                                            @*<img src="@carouselShot.Url" alt="@carouselShot.Name" />*@
+                                                            <img src="@carouselShot.GetCropUrl("Portfolio_700x435")" alt="@carouselShot.Name" />
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+                                        </figure>
+                                    </li>
+                                }
+                            </ul>
+                            <nav> <span class="fa nav-prev"></span> <span class="fa nav-next"></span> <span class="fa nav-close"></span> </nav>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,592 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ProposalEstimator>
+@using System;
+@using System.Text;
+@using formulate.app.Types;
+@using formulate.core.Models;
+
+
+@{
+    Boolean isChild = false;
+}
+
+
+<article class="content proposal gray-bg" id="chapterproposal">
+    <div class="inner">
+        <h2>Proposal Creator</h2>
+        <div class="title-divider"></div>
+
+
+
+        <dl class="accordion">
+
+            <dt><a href=""><h3>Introducation</h3></a></dt>
+            <dd>
+                <p>Looking for a new website?  How about upgrading an existing site with an amazing content management system?  Let us help you.</p>
+                <p>We create fully customized websites built upon the latest Umbraco Content Management System.    All features are fully customizable.  You dream it, we will build it.  No cookie-cutter websites here:</p>
+
+                <div class="code">&lt;<span class="tag"> You:Get </span>&nbsp;&nbsp;<span class="attrName">What-U</span>=<span class="attr">"Pay 4"</span> /&gt;</div>
+
+                <p>The form below is completely optional, but will give you a general idea as to the cost to build your ideal website.</p>
+                <br />
+                <br />
+
+                <div class="btnRow">
+                    <input type="button" class="button" value="Let's begin" />
+                </div>
+            </dd>
+
+
+            <dt><a href=""><h3>Site Architecture</h3></a></dt>
+            <dd>
+                <p>A taxonomy is the first step in determining what it will take to build your site.  Taxonomies are like a site-map for your website.  It organizes all your website's pages into groups with parent/child relationships.</p>
+                <blockquote class="paddedBlockquote">
+                    <ul>
+                        <li>
+                            Home
+                            <ul>
+                                <li>
+                                    About
+                                    <ul>
+                                        <li>
+                                            Who we are
+                                        </li>
+                                        <li>
+                                            Meet the Staff
+                                            <ul>
+                                                <li>staff member 1</li>
+                                                <li>staff member 2</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    News & Events
+                                    <ul>
+                                        <li>
+                                            Event Calendar
+                                        </li>
+                                        <li>
+                                            Blog
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </blockquote>
+                <div class="full-divider"></div>
+                <br />
+                <p>Select how we should handle the taxonomy:</p>
+                <blockquote>
+                    @*<input id="rblTaxonomy_0" type="radio" name="rblTaxonomy" value="3" />
+                        <label for="rblTaxonomy_0"> I will be providing the site’s taxonomy.</label>
+                        <br />
+                        <input id="rblTaxonomy_1" type="radio" name="rblTaxonomy" value="15" />
+                        <label for="rblTaxonomy_1"> Create a site taxonomy for me.</label>*@
+                    @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.Taxonomy)
+                    {
+                        <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                        <label for="@rb["id"]"> @rb["label"]</label>
+                        <br />
+                    }
+                </blockquote>
+                <p>
+                    How many pages will the site contain?<br />
+                    <sup>*Give a general idea, does not need to be exact</sup>
+                </p>
+                <blockquote>
+                    <input id="txbPageCount" name="txbPageCount" type="number" value="1">
+                </blockquote>
+
+                <br />
+                <br />
+
+                <div class="btnRow">
+                    <input type="button" class="button" value="Next" />
+                </div>
+            </dd>
+
+
+            <dt><a href=""><h3>Design</h3></a></dt>
+            <dd>
+                <p>Do you have an existing website or web design?</p>
+                <blockquote>
+                    @*<input id="rblExistingWebsite_0" type="radio" name="rblExistingWebsite" value="yes" class="yesNoController" data-controllername="design" />
+                        <label for="rblExistingWebsite_0"> Yes</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input id="rblExistingWebsite_1" type="radio" name="rblExistingWebsite" value="no" class="yesNoController" data-controllername="design" />
+                        <label for="rblExistingWebsite_1"> No</label>*@
+
+                    @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.ExistingWebsite)
+                    {
+                        <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                        <label for="@rb["id"]"> @rb["label"]</label>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    }
+                </blockquote>
+
+                <div class="yesNoControl design yes">
+                    <p>Will you be:</p>
+                    <blockquote>
+                        @*<input id="rblExistingWebsiteOptions_0" type="radio" name="rblExistingWebsiteOptions" value="12" />
+                            <label for="rblExistingWebsiteOptions_0"> Reusing the existing design?</label>
+                            <br />
+                            <input id="rblExistingWebsiteOptions_1" type="radio" name="rblExistingWebsiteOptions" value="24" />
+                            <label for="rblExistingWebsiteOptions_1"> Having us upgrade the existing design?</label>
+                            <br />
+                            <input id="rblExistingWebsiteOptions_2" type="radio" name="rblExistingWebsiteOptions" value="40" />
+                            <label for="rblExistingWebsiteOptions_2"> Having us create a new design?</label>
+                            <br />
+                            <input id="rblExistingWebsiteOptions_3" type="radio" name="rblExistingWebsiteOptions" value="12" />
+                            <label for="rblExistingWebsiteOptions_3"> Providing us with the new site’s design layout?</label>*@
+
+                        @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.ExistingWebsiteOptions)
+                        {
+                            <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                            <label for="@rb["id"]"> @rb["label"]</label>
+                            <br />
+                        }
+                    </blockquote>
+                    <p>
+                        Do you have an existing wireframe?
+                        <blockquote>
+                            @*<input id="rblExistingWireframe_0" type="radio" name="rblExistingWireframe" value="0" />
+                                <label for="rblExistingWireframe_0"> Yes</label>
+                                <br />
+                                <input id="rblExistingWireframe_1" type="radio" name="rblExistingWireframe" value="15" />
+                                <label for="rblExistingWireframe_1"> No</label>*@
+
+                            @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.ExistingWireframe)
+                            {
+                                <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                                <label for="@rb["id"]"> @rb["label"]</label>
+                                <br />
+                            }
+                        </blockquote>
+                    </p>
+                </div>
+
+                <div class="yesNoControl design no">
+                    <p>Will you be:</p>
+                    <blockquote>
+                        @*<input id="rblNewWebsite_0" type="radio" name="rblNewWebsite" value="55" />
+                            <label for="rblNewWebsite_0"> Having us create a new site design & wireframe?</label>
+                            <br />
+                            <input id="rblNewWebsite_1" type="radio" name="rblNewWebsite" value="0" />
+                            <label for="rblNewWebsite_1"> Providing us with the new site’s design and wireframe?</label>
+                            <br />
+                            <input id="rblNewWebsite_2" type="radio" name="rblNewWebsite" value="15" />
+                            <label for="rblNewWebsite_2"> Providing us with the new site’s design only?</label>
+                            <br />
+                            <input id="rblNewWebsite_3" type="radio" name="rblNewWebsite" value="40" />
+                            <label for="rblNewWebsite_3"> Providing us with the new site’s wireframe only?</label>*@
+
+                        @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.NewWebsite)
+                        {
+                            <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                            <label for="@rb["id"]"> @rb["label"]</label>
+                            <br />
+                        }
+                    </blockquote>
+                </div>
+
+                <br />
+                <br />
+
+                <div class="btnRow">
+                    <input type="button" class="button" value="Next" />
+                </div>
+            </dd>
+
+
+            <dt><a href=""><h3>Website Type</h3></a></dt>
+            <dd>
+                <p>What type of website are you looking to have made?</p>
+                <blockquote>
+                    @*<input id="rblWebsiteType_0" type="radio" name="rblWebsiteType" value="1" class="yesNoController" />
+                        <label for="rblWebsiteType_0"> Personal Website</label>
+                        <br />
+                        <input id="rblWebsiteType_1" type="radio" name="rblWebsiteType" value="0" class="yesNoController" />
+                        <label for="rblWebsiteType_1"> Infopreneur Website</label>
+                        <br />
+                        <input id="rblWebsiteType_2" type="radio" name="rblWebsiteType" value="0" class="yesNoController" />
+                        <label for="rblWebsiteType_2"> Brochure Website</label>
+                        <br />
+                        <input id="rblWebsiteType_3" type="radio" name="rblWebsiteType" value="0" class="yesNoController" />
+                        <label for="rblWebsiteType_3"> Nonprofit or Religious Website</label>
+                        <br />
+                        <input id="rblWebsiteType_4" type="radio" name="rblWebsiteType" value="0" class="yesNoController" />
+                        <label for="rblWebsiteType_4"> Portfolio Website</label>
+                        <br />
+                        <input id="rblWebsiteType_5" type="radio" name="rblWebsiteType" value="1" class="yesNoController" />
+                        <label for="rblWebsiteType_5"> Blog</label>
+                        <br />
+                        <input id="rblWebsiteType_6" type="radio" name="rblWebsiteType" value="1" class="yesNoController" />
+                        <label for="rblWebsiteType_6"> Business Website or Web Portal</label>
+                        <br />
+                        <input id="rblWebsiteType_7" type="radio" name="rblWebsiteType" value="1" class="yesNoController" />
+                        <label for="rblWebsiteType_7"> Media or Entertainment Website</label>
+                        <br />
+                        <input id="rblWebsiteType_8" type="radio" name="rblWebsiteType" value="1" class="yesNoController" />
+                        <label for="rblWebsiteType_8"> Job Board</label>
+                        <br />
+                        <input id="rblWebsiteType_9" type="radio" name="rblWebsiteType" value="1" class="yesNoController" />
+                        <label for="rblWebsiteType_9"> Business Directory </label>
+                        <br />
+                        <input id="rblWebsiteType_10" type="radio" name="rblWebsiteType" value="1" class="yesNoController" />
+                        <label for="rblWebsiteType_10"> Wiki or Community Forum Website</label>
+                        <br />
+                        <input id="rblWebsiteType_11" type="radio" name="rblWebsiteType" value="2" class="yesNoController" />
+                        <label for="rblWebsiteType_11"> Podcasting website</label>
+                        <br />
+                        <input id="rblWebsiteType_12" type="radio" name="rblWebsiteType" value="1" class="yesNoController" />
+                        <label for="rblWebsiteType_12"> E-commerce Website</label>
+                        <br />
+                        <input id="rblWebsiteType_13" type="radio" name="rblWebsiteType" value="other" class="yesNoController" data-controllername="websiteType" />
+                        <label for="rblWebsiteType_13"> Other [Tell us what you are looking for]</label>
+                        <br />*@
+
+                    @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.WebsiteType)
+                    {
+                        <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                        <label for="@rb["id"]"> @rb["label"]</label>
+                        <br />
+                    }
+
+                    <textarea id="txbWebsiteType_Other" rows="5" class="yesNoControl websiteType other"></textarea>
+                </blockquote>
+
+
+                <p>How will you want to handle mobile devices?</p>
+                <blockquote>
+                    @*<input id="rblMobile_0" type="radio" name="rblMobile" value="0" />
+                        <label for="rblMobile_0"> Make the website adjust responsively to mobile browsers</label>
+                        <br />
+                        <input id="rblMobile_1" type="radio" name="rblMobile" value="0" />
+                        <label for="rblMobile_1"> Create a mobile app that can be installed on mobile devices</label>*@
+
+                    @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.Mobile)
+                    {
+                        <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                        <label for="@rb["id"]"> @rb["label"]</label>
+                        <br />
+                    }
+                </blockquote>
+
+                <br />
+                <br />
+
+                <div class="btnRow">
+                    <input type="button" class="button" value="Next" />
+                </div>
+            </dd>
+
+
+            <dt><a href=""><h3>Domain Name</h3></a></dt>
+            <dd>
+                <p>Do you have a domain name for your website?</p>
+
+                @*<input id="rblDomainName_0" type="radio" name="rblDomainName" value="0.5" />
+                    <label for="rblDomainName_0"> I have an existing domain name.</label>
+                    <br />
+                    <input id="rblDomainName_1" type="radio" name="rblDomainName" value="0.5" />
+                    <label for="rblDomainName_1"> I will purchase the domain name.</label>
+                    <br />
+                    <input id="rblDomainName_2" type="radio" name="rblDomainName" value="1" />
+                    <label for="rblDomainName_2"> Please purchase the domain name for me.</label>*@
+
+                @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.DomainName)
+                {
+                    <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                    <label for="@rb["id"]"> @rb["label"]</label>
+                    <br />
+                }
+
+                <br />
+                <br />
+
+                <div class="btnRow">
+                    <input type="button" class="button" value="Next" />
+                </div>
+            </dd>
+
+
+            <dt><a href=""><h3>Web Hosting</h3></a></dt>
+            <dd>
+                <p>A web host is a server that provides access for people to view your website.  Basically it is the home where your website will live.  How will you be handling your website's hosting?</p>
+
+                @*<input id="rblWebHosting_1" type="radio" name="rblWebHosting" value="1" />
+                    <label for="rblWebHosting_1"> I will provide a host site for you.</label>
+                    <br />
+                    <input id="rblWebHosting_0" type="radio" name="rblWebHosting" value="4" />
+                    <label for="rblWebHosting_0"> Please purchase the proper hosting package for me.</label>*@
+
+                @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.WebHosting)
+                {
+                    <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                    <label for="@rb["id"]"> @rb["label"]</label>
+                    <br />
+                }
+
+                <br />
+                <br />
+                <p>
+                    Will your site require an SSL certificate?<br />
+                    <sup>*Yes if you will be handling any sensitive user information.</sup>
+                </p>
+
+                @*<input id="rblSSL_0" type="radio" name="rblSSL" value="3" />
+                    <label for="rblSSL_0">Yes</label>
+                    <br />
+                    <input id="rblSSL_1" type="radio" name="rblSSL" value="0" />
+                    <label for="rblSSL_1">No</label>*@
+
+                @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.SSL)
+                {
+                    <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                    <label for="@rb["id"]"> @rb["label"]</label>
+                    <br />
+                }
+
+                <br />
+                <br />
+
+                <div class="btnRow">
+                    <input type="button" class="button" value="Next" />
+                </div>
+            </dd>
+
+
+            <dt><a href=""><h3>Content Management</h3></a></dt>
+            <dd>
+                <p>Will we be entering or migrating content to the new site?</p>
+                @*<input id="rblMigratingContent_0" type="radio" name="rblMigratingContent" value="calculate" />
+                    <label for="rblMigratingContent_0"> Yes</label>
+                    <input id="rblMigratingContent_1" type="radio" name="rblMigratingContent" value="0" />
+                    <label for="rblMigratingContent_1"> No</label>*@
+
+                @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.MigratingContent)
+                {
+                    <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                    <label for="@rb["id"]"> @rb["label"]</label>
+                    <br />
+                }
+
+                <br />
+                <br />
+
+                <p>Will you be providing us with any needed images?</p>
+                @*<input id="rblProvideImages_0" type="radio" name="rblProvideImages" value="calculate" />
+                    <label for="rblProvideImages_0"> Yes</label>
+                    <input id="rblProvideImages_1" type="radio" name="rblProvideImages" value="0" />
+                    <label for="rblProvideImages_1"> No</label>*@
+
+                @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.ProvideImages)
+                {
+                    <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                    <label for="@rb["id"]"> @rb["label"]</label>
+                    <br />
+                }
+
+                <br />
+                <br />
+
+                <p>Will we be permitted to purchase any needed images?</p>
+                @*<input id="rblPurchaseImages_0" type="radio" name="rblPurchaseImages" value="calculate" />
+                    <label for="rblPurchaseImages_0"> Yes</label>
+                    <input id="rblPurchaseImages_1" type="radio" name="rblPurchaseImages" value="0" />
+                    <label for="rblPurchaseImages_1"> No</label>*@
+
+                @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.PurchaseImages)
+                {
+                    <input id="@rb["id"]" type="radio" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                    <label for="@rb["id"]"> @rb["label"]</label>
+                    <br />
+                }
+
+                <br />
+                <br />
+
+                <div class="btnRow">
+                    <input type="button" class="button" value="Next" />
+                </div>
+            </dd>
+
+
+            <dt><a href=""><h3>Website Components</h3></a></dt>
+            <dd>
+                <p>Will your site be needing any of the following?</p>
+                <blockquote>
+                    @*<input id="cbForms" type="checkbox" name="cbForms" value="0" />
+                        <label for="cbForms"> User submission forms</label>
+                        <br />
+                        <input id="cbListPgs" type="checkbox" name="cbListPgs" value="0" />
+                        <label for="cbListPgs"> List Pages</label>
+                        <br />
+                        <input id="cbBlogs" type="checkbox" name="cbBlogs" value="0" class="yesNoController" data-controllername="blogs" />
+                        <label for="cbBlogs"> Blog(s)</label>
+                        <br />
+                        <blockquote class="yesNoControl blogs 0">
+                            <input id="cbPostOnBlog" type="checkbox" name="cbPostOnBlog" value="0" />
+                            <label for="cbPostOnBlog"> Will users be able to post on the blog?</label>
+                            <br />
+                            <input id="cbCommentOnBlog" type="checkbox" name="cbCommentOnBlog" value="0" />
+                            <label for="cbCommentOnBlog"> Will users be able to comment on the blog?</label>
+                        </blockquote>
+                        <input id="cbSEO" type="checkbox" name="cbSEO" value="0" />
+                        <label for="cbSEO"> Search Engine Optimization Tools</label>
+                        <br />
+                        <input id="cbVideos" type="checkbox" name="cbVideos" value="0" />
+                        <label for="cbVideos"> Videos</label>
+                        <br />
+                        <input id="cbPodcasts" type="checkbox" name="cbPodcasts" value="0" />
+                        <label for="cbPodcasts"> Podcasts</label>
+                        <br />
+                        <input id="cbDocuments" type="checkbox" name="cbDocuments" value="0" />
+                        <label for="cbDocuments"> PDFs and other documents</label>
+                        <br />
+                        <input id="cbMemberships" type="checkbox" name="cbMemberships" value="0" class="yesNoController" data-controllername="memberships" />
+                        <label for="cbMemberships"> Memberships and Login capabilities</label>
+                        <br />
+                        <blockquote class="yesNoControl memberships 0">
+                            <input id="cbLockedContent" type="checkbox" name="cbLockedContent" value="0" />
+                            <label for="cbLockedContent"> Will some content need to be locked to people who are not logged in?</label>
+                            <br />
+                            <input id="cbMemberAccts" type="checkbox" name="cbMemberAccts" value="0" />
+                            <label for="cbMemberAccts"> Will members need the ability to create and edit their accounts?</label>
+                        </blockquote>
+                        <input id="cbDonations" type="checkbox" name="cbDonations" value="0" />
+                        <label for="cbDonations"> Accept Donation</label>
+                        <br />
+                        <input id="cbPurchase" type="checkbox" name="cbPurchase" value="0" />
+                        <label for="cbPurchase"> Allow purchase of products or services</label>
+                        <br />
+                        <input id="cbEmailSignups" type="checkbox" name="cbEmailSignups" value="0" />
+                        <label for="cbEmailSignups"> Accept email signups</label>
+                        <br />
+                        <input id="cbSearch" type="checkbox" name="cbSearch" value="0" />
+                        <label for="cbSearch"> Search page</label>
+                        <br />
+                        <input id="cbSitemap" type="checkbox" name="cbSitemap" value="0" />
+                        <label for="cbSitemap"> Site Map</label>
+                        <br />
+                        <input id="cbEmails" type="checkbox" name="cbEmails" value="0" />
+                        <label for="cbEmails"> Emails</label>*@
+
+                    @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.WebsiteComponents)
+                    {
+
+
+                        if (rb["child"].ToString() == "True")
+                        {
+                            isChild = true;
+                        }
+
+                        if ((isChild) && (rb["child"].ToString() != "True"))
+                        {
+                        @:</blockquote>
+                        isChild = false;
+                    }
+
+                    <input id="@rb["id"]" type="checkbox" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" data-isparent="@rb["parent"]" data-ischild="@rb["child"]" />
+                    <label for="@rb["id"]"> @rb["label"]</label>
+                    <br />
+
+                    if ((rb["parent"] != null) && (rb["parent"].ToString() == "True"))
+                    {
+                        @:<blockquote class="yesNoControl @rb["controller"] @rb["value"]">
+                        }
+
+                    }
+                </blockquote>
+
+                <br />
+                <br />
+
+                <div class="btnRow">
+                    <input type="button" class="button" value="Next" />
+                </div>
+            </dd>
+
+
+            <dt><a href=""><h3>Social Media</h3></a></dt>
+            <dd>
+                <p>Utilizing social media can be a great benefit for both you and your audience.  Tell us how we can help you connect your website to the social universe.</p>
+
+                <blockquote>
+                    @*<input id="cbFollowUs" type="checkbox" name="cbFollowUs" value="0" />
+                        <label for="cbFollowUs"> Add "Follow Us" links to my site.</label>
+                        <br />
+                        <input id="cbShareUs" type="checkbox" name="cbShareUs" value="0" />
+                        <label for="cbShareUs"> Allow my audience to 'Share' my site on their social medias.</label>*@
+                    @foreach (Newtonsoft.Json.Linq.JToken rb in Model.Content.SocialMedias)
+                    {
+                        <input id="@rb["id"]" type="checkbox" name="@rb["name"]" value="@rb["value"]" class="@rb["class"]" data-controllername="@rb["controller"]" />
+                        <label for="@rb["id"]"> @rb["label"]</label>
+                        <br />
+                    }
+                </blockquote>
+                <br />
+                <br />
+
+                <div class="btnRow">
+                    <input type="button" class="button" value="Next" />
+                </div>
+            </dd>
+
+
+            <dt><a href=""><h3>Estimate</h3></a></dt>
+            <dd>
+                <p>The following is a <strong>general estimate</strong> as to what it may take to build your new website.</p>
+
+                <br />
+
+                <div class="table">
+                    <div>
+                        <div>
+                            <h4>Week(s)</h4>
+                        </div>
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div>
+                            <h4><label id="lblWeeks"></label></h4>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h4>Cost</h4>
+                        </div>
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div>
+                            <h4>$<label id="lblCosts"></label></h4>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <p>Please note that this is just an estimated guess.  To submit this form and request a more formal proposal, please click below:</p>
+
+                <br />
+                <br />
+
+                <div class="btnRow">
+                    <a class="navLink button" href="#chaptercontact">Contact Me <span class="btnArrow">&#x2192;</span></a>
+                </div>
+
+                <div class="hflds">
+                    <input type="hidden" id="hfldHours" value="@Model.Content.HourlyRate" />
+                    <input type="hidden" id="hfldWeeks" value="0" />
+                    <input type="hidden" id="hfldCostPerHour" value="80" />
+                    <input type="hidden" id="hfldTotalCost" value="0" />
+                    @*<input type="hidden" id="hfldProposalValues" value="" />*@
+                </div>
+            </dd>
+
+        </dl>
+
+
+    </div>
+</article>

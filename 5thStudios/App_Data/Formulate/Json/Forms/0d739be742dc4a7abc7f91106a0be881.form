@@ -1,0 +1,105 @@
+{
+  "Id": "0d739be7-42dc-4a7a-bc7f-91106a0be881",
+  "Path": [
+    "3d634e15-7d15-45fa-a8a9-12838fa3a345",
+    "0d739be7-42dc-4a7a-bc7f-91106a0be881"
+  ],
+  "Alias": "dropMeALine",
+  "Name": "James Edward Fifth",
+  "Fields": [
+    {
+      "Id": "384a549a-a031-47ed-8329-30dc922f4150",
+      "Alias": "yourName",
+      "Name": "Your Name",
+      "Label": "Your Name...",
+      "Category": "Standard",
+      "Validations": [],
+      "MetaInfo": null,
+      "FieldConfiguration": "{}",
+      "TypeId": "17906580-86ea-440b-bc30-9e1b099f803b",
+      "IsTransitory": false,
+      "IsServerSideOnly": false,
+      "IsHidden": false,
+      "IsStored": true
+    },
+    {
+      "Id": "33e95069-3399-4dfb-9497-ce3cb810a0b3",
+      "Alias": "yourEmail",
+      "Name": "Your Email",
+      "Label": "Your Email...",
+      "Category": "Standard",
+      "Validations": [],
+      "MetaInfo": null,
+      "FieldConfiguration": "{}",
+      "TypeId": "17906580-86ea-440b-bc30-9e1b099f803b",
+      "IsTransitory": false,
+      "IsServerSideOnly": false,
+      "IsHidden": false,
+      "IsStored": true
+    },
+    {
+      "Id": "5f152d95-8172-46a7-86af-0cf90bcfdd7f",
+      "Alias": "yourMessage",
+      "Name": "Your Message",
+      "Label": "Your Message...",
+      "Category": "Standard",
+      "Validations": [],
+      "MetaInfo": null,
+      "FieldConfiguration": "{}",
+      "TypeId": "9da84359-4d0b-4944-9144-9f8ccae7a4da",
+      "IsTransitory": false,
+      "IsServerSideOnly": false,
+      "IsHidden": false,
+      "IsStored": true
+    },
+    {
+      "Id": "bcb5b87f-2f61-4050-a146-a29b257be99d",
+      "Alias": "submit",
+      "Name": "Submit",
+      "Label": "Say Hello!",
+      "Category": null,
+      "Validations": [],
+      "MetaInfo": null,
+      "FieldConfiguration": "{\r\n  \"buttonKind\": \"Submit\"\r\n}",
+      "TypeId": "cde8565c-5e92-4112-9a1f-7ffa1940c53c",
+      "IsTransitory": true,
+      "IsServerSideOnly": false,
+      "IsHidden": false,
+      "IsStored": true
+    },
+    {
+      "Id": "7d78dadb-f9ec-4b77-a4cb-5a53ab9ddfbc",
+      "Alias": "hfldProposalValues",
+      "Name": "hfldProposalValues",
+      "Label": "Proposal Values",
+      "Category": "Standard",
+      "Validations": [],
+      "MetaInfo": null,
+      "FieldConfiguration": "{}",
+      "TypeId": "3df6facd-2ffa-4055-b0be-94e8fa8e7c4a",
+      "IsTransitory": false,
+      "IsServerSideOnly": false,
+      "IsHidden": true,
+      "IsStored": true
+    }
+  ],
+  "Handlers": [
+    {
+      "Id": "ff602970-e166-4581-950a-a8398fd50486",
+      "Alias": "email",
+      "Name": "Email",
+      "Enabled": true,
+      "HandlerConfiguration": "{\r\n  \"recipients\": [\r\n    {\r\n      \"email\": \"jim.fifth@5thstudios.com\"\r\n    }\r\n  ],\r\n  \"recipientFields\": [\r\n    {\r\n      \"id\": \"33e9506933994dfb9497ce3cb810a0b3\"\r\n    }\r\n  ],\r\n  \"fieldsToInclude\": [],\r\n  \"senderEmail\": \"support@5thstudios.com\",\r\n  \"deliveryType\": \"bcc\",\r\n  \"subject\": \"Resume Submission to 5thStudios.com\",\r\n  \"message\": \"The following message was submitted to James Fifth's \\nonline resume @ http://5thstudios.com\",\r\n  \"appendFields\": true,\r\n  \"excludeFieldLabels\": false,\r\n  \"includeHiddenFields\": false\r\n}",
+      "TypeId": "a0c06033-cb94-424f-9c03-5b10a420db16"
+    },
+    {
+      "Id": "3dabc3f2-3989-4ef1-99d6-6b5d01848963",
+      "Alias": "storage",
+      "Name": "Storage",
+      "Enabled": true,
+      "HandlerConfiguration": "{}",
+      "TypeId": "238ea920-71f4-4d8c-9cc4-33d7181c9c46"
+    }
+  ],
+  "MetaInfo": null
+}

@@ -1,0 +1,59 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    //Instantiate variables
+    IPublishedContent ipSignatureImg;
+    IPublishedContent ipBackgroundImg;
+    string signatureImgUrl;
+    string backgroundImgUrl;
+
+    //Obtain Signature Image
+    ipSignatureImg = Umbraco.TypedMedia(Int32.Parse(Umbraco.Field("signature").ToString()));
+    signatureImgUrl = ipSignatureImg.GetCropUrl("Signature_200x107");
+
+    //Obtain Background Image
+    ipBackgroundImg = Umbraco.TypedMedia(Int32.Parse(Umbraco.Field("thankYouBackgroundImage").ToString()));
+    backgroundImgUrl = ipBackgroundImg.Url;
+    //backgroundImgUrl = ipBackgroundImg.GetCropUrl("Thankyou_1608x1080");
+}
+
+<style>
+        /*.introduction-end {background-image: url('@backgroundImgUrl');}*/
+        .introduction-end {background: url('@backgroundImgUrl')no-repeat left top #000;}
+    </style>
+
+
+<article class="content introduction-end" id="chapterthankyou">
+    <div class="inner">
+        <div class="row introduction-end-con">
+            @*<div class="col-3">
+                &nbsp;
+            </div>*@
+            <div class="col-12">
+                <div class="hide visibility">
+                    <br class="hide-for-small" />
+                    <br class="hide-for-small" />
+                    @CurrentPage.thankYouMessage
+                    <div style="text-align:right;">
+                        <img src="@signatureImgUrl" class="signature" alt="James Fifth" />
+                    </div>
+                    <br />
+                    <br />
+                    <div id="rotate" class="rotate">
+
+                        @foreach (var attr in CurrentPage.myAttributes)
+                        {
+                            <div><span>@attr</span></div>
+                        }
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-3">
+                &nbsp;
+            </div>*@
+        </div>
+    </div>
+</article>
+
+<style>
+</style>

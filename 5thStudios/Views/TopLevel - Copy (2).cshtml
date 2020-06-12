@@ -1,0 +1,60 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{ Layout = null; }
+@{ var meta = Model.Content.GetPropertyValue<SEOChecker.MVC.MetaData>("seoChecker"); }
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+    @meta.AllTags
+    
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic,100,400italic,500,500italic,700,900,900italic,700italic%7COswald:400,300,700' />
+    <link rel="stylesheet" type='text/css' href="https://use.fontawesome.com/releases/v5.7.2/css/solid.css" integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B" crossorigin="anonymous" />
+    <link rel="stylesheet" type='text/css' href="https://use.fontawesome.com/releases/v5.7.2/css/fontawesome.css" integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+" crossorigin="anonymous" />
+    <link type="text/css" rel="stylesheet" href="~/bundles/bundled_styles.min.css" />
+
+    <script type="text/javascript" src="~/bundles/bundled_scripts_header.min.js"></script>
+</head>
+<body>
+    <div id="container" class="container">
+        <!-- Left Menu / Logo-->
+        @Html.Partial("Menu")
+
+        <!-- Go to top link for mobile device -->
+        <a href="#menu" class="totop-link">Go to the top</a>
+        <div class="content-scroller">
+            <div class="content-wrapper">
+
+                <!-- Introduction -->
+                @*@Html.Partial("Introduction")*@
+
+                <!-- About -->
+                @*@Html.Partial("About")*@
+
+                <!-- Portfolio -->
+                @*@Html.Partial("Portfolio")*@
+
+                <!-- Skills -->
+                @*@Html.Partial("Skills")*@
+
+                <!-- Proposal -->
+                @*@Html.Partial("Proposal", Model.Content.Site().FirstChild("proposalEstimator").OfType<ProposalEstimator>())*@
+
+                <!-- Contact -->
+                @Html.Partial("Contact")
+
+                <!-- Thankyou -->
+                @*@Html.Partial("Thankyou")*@
+            </div>
+            <!-- content-wrapper -->
+        </div>
+        <!-- content-scroller -->
+    </div>
+
+    <script type="text/javascript" src="~/bundles/bundled_scripts.min.js"></script>
+</body>
+</html>

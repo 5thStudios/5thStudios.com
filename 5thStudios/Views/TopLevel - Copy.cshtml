@@ -1,0 +1,114 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+    <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+    <title>Andrew Smith - Responsive Resume / Personal Portfolio Template</title>
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Google Font-->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic,100,400italic,500,500italic,700,900,900italic,700italic%7COswald:400,300,700' rel='stylesheet' type='text/css'>
+    <!-- Design Style -->
+    <link rel="stylesheet" type="text/css" href="styles/scroll.css" />
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/solid.css" integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/fontawesome.css" integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+" crossorigin="anonymous">
+    <!-- Portfolio Thumbnail / Slider -->
+    <link rel="stylesheet" type="text/css" href="styles/portfolio.css" />
+    <link rel="stylesheet" type="text/css" href="styles/carousel.css">
+    <!-- Responsive -->
+    <link rel="stylesheet" type="text/css" href="styles/responsive.css" />
+    <!-- Pie Chart / Skills -->
+    <script type="text/javascript" src="scripts/jquery-2.0.3.min.js"></script>
+    <!-- Send Email -->
+    <script type="text/javascript" src="scripts/sendemail.js"></script>
+    <!-- Progressbar / Skills-->
+    <script type="text/javascript" src="scripts/progressbar.js"></script>
+    <!-- Portfolio-->
+    <script src="scripts/modernizr.custom.js"></script>
+</head>
+<body>
+    <div id="container" class="container">
+        <!-- Left Menu / Logo-->
+        @Html.Partial("Menu")
+        
+        <!-- Go to top link for mobile device -->
+        <a href="#menu" class="totop-link">Go to the top</a>
+        <div class="content-scroller">
+            <div class="content-wrapper">
+
+                <!-- Introduction -->
+                @Html.Partial("Introduction")
+
+                <!-- About -->
+                @Html.Partial("About")
+
+                <!-- Skills -->
+                @Html.Partial("Skills")
+
+                <!-- Experience -->
+                @Html.Partial("Experience")
+
+                <!-- Education -->
+                @Html.Partial("Education")
+
+                <!-- Portfolio -->
+                @Html.Partial("Portfolio")
+
+                <!-- Contact -->
+                @Html.Partial("Contact")
+
+                <!-- Thankyou -->
+                @Html.Partial("Thankyou")
+            </div>
+            <!-- content-wrapper -->
+        </div>
+        <!-- content-scroller -->
+    </div>
+
+
+
+    <script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="scripts/head.min.js"></script>
+    <!-- Portfolio Thumbnail -->
+    <script type="text/javascript" src="scripts/imagesloaded.4.1.4.js"></script>
+    <script type="text/javascript" src="scripts/masonry.min.js"></script>
+    <script type="text/javascript" src="scripts/class_helper.js"></script>
+    <script type="text/javascript" src="scripts/grid_gallery.js"></script>
+    <!-- Portfolio Grid -->
+    <script>
+        new CBPGridGallery(document.getElementById('grid-gallery'));
+    </script>
+    <!-- Portfolio Slider-->
+    <script type="text/javascript" src="scripts/carousel.js"></script>
+    <script type="text/javascript" src="scripts/jquery.easypiechart.js"></script>
+    <script type="text/javascript" src="scripts/text.rotator.js"></script>
+    <!-- Page Scrolling -->
+    <script>
+        head.js(
+            { mousewheel: "scripts/jquery.mousewheel.js" },
+            { mwheelIntent: "scripts/mwheelIntent.js" },
+            { jScrollPane: "scripts/jquery.jscrollpane.min.js" },
+            { history: "scripts/jquery.history.js" },
+            { stringLib: "scripts/core.string.js" },
+            { easing: "scripts/jquery.easing.1.3.js" },
+            { smartresize: "scripts/jquery.smartresize.js" },
+            { page: "scripts/jquery.page.js" }
+        );
+    </script>
+    <!-- Fit Video -->
+    <script type="text/javascript" src="scripts/jquery.fitvids.js"></script>
+    <!-- All Javascript Component-->
+    <script src="scripts/settings.js"></script>
+
+
+    @*<script src="~/App_Plugins/formulate/responsive.plain-javascript.min.js"></script>
+        <script src="~/scripts/custom-formulate-script.js"></script>*@
+</body>
+</html>

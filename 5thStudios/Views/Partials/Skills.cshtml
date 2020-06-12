@@ -1,0 +1,80 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+<article class="content skills gray-bg" id="chapterskills">
+    <div class="inner">
+        <h2>Skills</h2>
+        <div class="title-divider"></div>
+
+        <div class="skills-con">
+            @*Application Patterns*@
+            <div class="container-sub skill-list">
+                @CurrentPage.skillDetails
+                <div class="row">
+                    <h3>Application Patterns</h3>                    
+                    @foreach (var ptrn in CurrentPage.applicationPatterns)
+                    {
+                        <div class="col-4 margin-top10">
+                            <ul>
+                                <li>@ptrn</li>
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="full-divider"></div>
+
+            @*Language Skills*@
+            <h3>Language Skills</h3>
+            <div class="container-sub margin-top50">
+                <div class="row">
+                    @foreach (var languageSkill in CurrentPage.languageSkills)
+                    {
+                        <div class="col-6 margin-bottom50">
+                            <div class="col-6"><span class="chart" data-percent="@languageSkill.percentage"><span class="percent"></span> </span></div>
+                            <div class="col-6 chart-text">
+                                <h4>@languageSkill.skill</h4>
+                                <p>@languageSkill.experience</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="full-divider"></div>
+
+            @*Library Knowledge*@
+            <div class="container-sub">
+                <div class="row">
+                    <h3>Library Knowledge</h3>
+
+                    @foreach (var libraryKnowledge in CurrentPage.libraryKnowledge)
+                    {
+                        <div class="progressbar-main margin-top40">
+                            <div class="progress-bar-description">@libraryKnowledge.skill</div>
+                            <div id="progressBar2" class="progress" data-percent="@libraryKnowledge.percentage">
+                                <div class="progress-value"></div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="full-divider"></div>
+
+            @*Tools of the Trade*@
+            <div class="container-sub skill-list">
+                <div class="row">
+                    <h3>Tools of the Trade</h3>
+
+                    @foreach (var tools in CurrentPage.toolsOfTheTrade)
+                    {
+                        <div class="col-6 margin-top10">
+                            <ul>
+                                <li>@tools.skill</li>
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</article>

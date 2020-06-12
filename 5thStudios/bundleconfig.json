@@ -1,0 +1,42 @@
+[
+  {
+    "outputFileName": "bundles/bundled_styles.css",
+    "inputFiles": [
+      "styles/normalize.css",
+      "styles/scroll.css",
+      "styles/style.css",
+      "styles/portfolio.css",
+      "styles/carousel.css",
+      "styles/responsive.css"
+    ]
+  },
+  {
+    "outputFileName": "bundles/bundled_scripts_header.js",
+    "inputFiles": [
+      "scripts/jquery-2.0.3.min.js",
+      "scripts/modernizr.custom.js"
+    ]
+  },
+  {
+    "outputFileName": "bundles/bundled_scripts.js",
+    "inputFiles": [
+      "scripts/jquery-1.7.1.min.js",
+      "scripts/head.min.js",
+      "scripts/imagesloaded.4.1.4.js",
+      "scripts/masonry.min.js",
+      "scripts/class_helper.js",
+      "scripts/grid_gallery.js",
+      "scripts/carousel.js",
+      "scripts/jquery.easypiechart.js",
+      "scripts/text.rotator.js",
+      "scripts/page-scrolling.js",
+      "scripts/jquery.fitvids.js",
+      "scripts/sendemail.js",
+      "scripts/progressbar.js",
+      "App_Plugins/formulate/responsive.plain-javascript.min.js",
+      "scripts/custom-formulate-script.js",
+      "scripts/proposal-generator.js",
+      "scripts/settings.js"
+    ]
+  }
+]

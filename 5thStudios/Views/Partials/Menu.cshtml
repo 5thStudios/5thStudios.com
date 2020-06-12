@@ -1,0 +1,48 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    //Instantiate variables
+    IPublishedContent ipSiteLogo;
+    string siteLogoImgUrl;
+
+    //Obtain Introduction Image
+    ipSiteLogo = Umbraco.TypedMedia(Int32.Parse(Umbraco.Field("siteLogo").ToString()));
+    siteLogoImgUrl = ipSiteLogo.GetCropUrl("Logo_140x140");
+}
+
+<aside class="menu" id="menu">
+    <div class="logo">
+        <!-- Logo image-->
+        <a href="/">
+            <img src="@siteLogoImgUrl" width="140" height="140" alt="" />
+        </a>
+        <!-- Logo name-->
+        <span>5thStudios.com</span>
+    </div>
+
+    <!-- Mobile Navigation-->
+    <a href="#menu1" class="menu-link fas fa-bars"></a>
+
+    <!-- Left Navigation-->
+    <nav id="menu1" role="navigation">
+        <a class="navLink" href="#chapterintroduction"><span id="link_introduction" class="active">Home</span></a>
+        <a class="navLink" href="#chapterabout"><span id="link_about">About</span></a>
+        <a class="navLink" href="#chapterportfolio"><span id="link_portfolio">Portfolio</span></a>
+        <a class="navLink" href="#chapterskills"><span id="link_skills">Skills</span></a>
+        @*<a class="navLink" href="#chapterproposal"><span id="link_proposal">Proposal</span></a>*@
+        <a class="navLink" href="#chaptercontact"><span id="link_contact">Contact</span></a>
+    </nav>
+    
+    
+    @*<div class="social"> <a href="https://www.facebook.com" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a> <a href="https://twitter.com" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a> <a href="https://plus.google.com" target="_blank" class="google-plus"><i class="fa fa-google-plus"></i></a> </div>*@
+    <div class="social">
+        <a href="@CurrentPage.facebook" target="_blank" class="facebook"><img alt="Facebook" src="~/images/facebook.png" /></a>
+        <a href="@CurrentPage.linkedIn" target="_blank" class="linkedin"><img alt="LinkedIn" src="/images/linkedin.png" /></a>
+    </div>
+
+
+    <div class="copyright">
+        © 5th Studios<br>
+        All Rights Reserved.
+    </div>
+</aside>
